@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yuktiidea/Terms%20and%20Conditions.dart';
+import 'package:yuktiidea/countrySelect.dart';
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
 
@@ -63,17 +64,31 @@ class _LandingPageState extends State<LandingPage> {
                    Row(
                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                      children: [
-                       Container(
+                       GestureDetector(
+                         onTap: (){
+                           Navigator.push(context,
+                           MaterialPageRoute(builder: (context) =>CountrySelect() ),
+                           );
+                         },
+                         child: Container(
 
-                         child: Image.asset('assests/img_3.png',
-                           width: MediaQuery.of(context).size.width*0.5,
-                           // height: 180,
+                           child: Image.asset('assests/img_3.png',
+                             width: MediaQuery.of(context).size.width*0.5,
+                             // height: 180,
+                           ),
                          ),
                        ),
-                       Container(
-                         child: Image.asset('assests/img_4.png',
-                          width: MediaQuery.of(context).size.width*0.5,
-                          // height: 200,
+                       GestureDetector(
+                         onTap: (){
+                           Navigator.push(context,
+                           MaterialPageRoute(builder: (context) => CountrySelect()),
+                           );
+                         },
+                         child: Container(
+                           child: Image.asset('assests/img_4.png',
+                            width: MediaQuery.of(context).size.width*0.5,
+                            // height: 200,
+                           ),
                          ),
                        )
                      ],
