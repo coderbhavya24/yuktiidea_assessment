@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:http/http.dart' as http;
+import 'package:yuktiidea/enterNumber.dart';
 import 'LandingPage.dart';
 
 class CountrySelect extends StatefulWidget {
@@ -153,58 +154,65 @@ class _CountrySelectState extends State<CountrySelect> {
                   shrinkWrap: true,
                   itemCount: _filteredCountries.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      height: 90,
-                      // width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        color: HexColor('#292929'),
-                        borderRadius: BorderRadius.circular(8.0), // Adjust border radius as needed
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.white.withOpacity(0.5), // Shadow color with opacity
-                            spreadRadius: -4, // Shadow spread radius
-                            blurRadius: 3, // Shadow blur radius
-                            offset: Offset(0, 2), // Shadow position
-                          ),
-
-                        ],
-                      ),
-                      // color: Colors.transparent,
-                      padding: EdgeInsets.all(10),
-                      margin: EdgeInsets.symmetric(vertical: 1,horizontal: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              SvgPicture.network(
-                                _filteredCountries[index].flag,
-                                width: 20, // Adjust width as needed
-                                height: 20, // Adjust height as needed
-                                fit: BoxFit.contain, // Adjust BoxFit as needed
-                              ),
-                              SizedBox(width: 10,),
-                              Text(_filteredCountries[index].name.length < 24 ?
-                              _filteredCountries[index].name : _filteredCountries[index].name.substring(0,24)
-                                ,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          Text(_filteredCountries[index].telCode,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16
+                    return GestureDetector(
+                      onTap: (){
+                        Navigator.push(context, 
+                        MaterialPageRoute(builder: (context)=> EnterNumber(_filteredCountries[index].telCode,_filteredCountries[index].flag))
+                        );
+                      },
+                      child: Container(
+                        height: 90,
+                        // width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          color: HexColor('#292929'),
+                          borderRadius: BorderRadius.circular(8.0), // Adjust border radius as needed
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.white.withOpacity(0.5), // Shadow color with opacity
+                              spreadRadius: -4, // Shadow spread radius
+                              blurRadius: 3, // Shadow blur radius
+                              offset: Offset(0, 2), // Shadow position
                             ),
-                          ),
-                        ],
+
+                          ],
+                        ),
+                        // color: Colors.transparent,
+                        padding: EdgeInsets.all(10),
+                        margin: EdgeInsets.symmetric(vertical: 1,horizontal: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SvgPicture.network(
+                                  _filteredCountries[index].flag,
+                                  width: 20, // Adjust width as needed
+                                  height: 20, // Adjust height as needed
+                                  fit: BoxFit.contain, // Adjust BoxFit as needed
+                                ),
+                                SizedBox(width: 10,),
+                                Text(_filteredCountries[index].name.length < 24 ?
+                                _filteredCountries[index].name : _filteredCountries[index].name.substring(0,24)
+                                  ,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            Text(_filteredCountries[index].telCode,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },
