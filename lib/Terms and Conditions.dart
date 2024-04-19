@@ -49,7 +49,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
     return Scaffold(
       backgroundColor: HexColor('#292929'),
       body: Container(
-        padding: const EdgeInsets.only(top: 40, right: 15,left: 15),
+        padding: const EdgeInsets.only(top: 45, right: 15,left: 15),
         child: Column(
           children: [
             Row(
@@ -71,9 +71,11 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                       color: Color(0xFF292929), // Circle background color
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.white, // Shadow color
-                          blurRadius: 10, // Spread of the shadow
-                          offset: Offset(0, 0), // Offset of the shadow
+                          color: Colors.white,
+                          // spreadRadius: -2,// Shadow color
+                          spreadRadius: -7,
+                          blurRadius: 16, // Spread of the shadow
+                          offset: Offset(-5, -5), // Offset of the shadow
                         ),
                       ],
                     ),
