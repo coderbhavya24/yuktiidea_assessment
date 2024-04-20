@@ -10,29 +10,32 @@ import 'package:yuktiidea/VerifyOtp.dart';
 import 'package:yuktiidea/countrySelect.dart';
 
 class EnterNumber extends StatefulWidget {
-  String code="d", img='d';
-  EnterNumber(String name,String cd){
+  String code="d", img='d',role='d';
+  EnterNumber(String roled, String name,String cd){
     this.code = name;
     this.img = cd;
+    this.role=roled;
   }
 
+
   @override
-  State<EnterNumber> createState() => _EnterNumberState(code,img);
+  State<EnterNumber> createState() => _EnterNumberState(role, code,img);
 }
 
 class _EnterNumberState extends State<EnterNumber> {
-  String code="d", img='d';
-  _EnterNumberState(String name,String cd){
+  String code="d", img='d', role='d';
+  _EnterNumberState(String roled, String name,String cd){
     this.code = name;
     this.img = cd;
+    this.role = roled;
   }
-  bool showerror = false;
+  bool showerror = true;
   String phone='09';
   TextEditingController _numberController = TextEditingController();
 
   Future<void> sendOTP(String countryCode, String phoneNumber) async {
     // API endpoint
-    String apiUrl = 'https://studylancer.yuktidea.com/api/student/login';
+    String apiUrl = 'https://studylancer.yuktidea.com/api/${role}/login';
 
     try {
       // Make POST request
@@ -96,11 +99,7 @@ class _EnterNumberState extends State<EnterNumber> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const CountrySelect()),
-                            );
+                            Navigator.pop(context);
                           },
                           child: Container(
                             width: 35,
@@ -219,12 +218,9 @@ class _EnterNumberState extends State<EnterNumber> {
                                   showerror = true;
                                 });
                               }
-                            }
-                            else if(value.length==10){
-                              setState(() {
-                                phone = _numberController.text;
+                              else{
                                 showerror=false;
-                              });
+                              }
                             }
                           },
                         ),
@@ -258,7 +254,7 @@ class _EnterNumberState extends State<EnterNumber> {
                     print(code+_numberController.text);
                     sendOTP(code, _numberController.text);
                     Navigator.push(context,
-                    MaterialPageRoute(builder: (context)=> VerifyOTP())
+                    MaterialPageRoute(builder: (context)=> VerifyOTP(phone))
                     );
                   }
                 },
@@ -270,13 +266,14 @@ class _EnterNumberState extends State<EnterNumber> {
                     color: HexColor('#292929'), // Background color of the container
                     borderRadius: BorderRadius.circular(18.0,
                     ),
+
                     border: Border.all(
                       color: HexColor('#1c1e1f'),
-                      width: 3
+                      width: showerror? 0: 3
                     ),// Adjust border radius as needed
                     boxShadow: [
                       BoxShadow(
-                        color: showerror ? HexColor('#292929') : HexColor('#f9d3b4').withOpacity(0.4), // Shadow color with opacity
+                        color: HexColor('#f9d3b4').withOpacity(0.4), // Shadow color with opacity
                         spreadRadius: 0.5 , // Shadow spread radius
                         blurRadius: 3, // Shadow blur radius
                         offset: Offset(-3, -3), // Shadow position
@@ -287,7 +284,7 @@ class _EnterNumberState extends State<EnterNumber> {
                     child: Text(
                       'Get OTP',
                       style: TextStyle(
-                        color: showerror? Colors.grey :HexColor('#f9d3b4'), // Text color
+                        color: showerror? HexColor('#77685e') :HexColor('#f9d3b4'), // Text color
                         fontSize: 19,
                         // fontWeight: FontWeight.bold,
                       ),

@@ -8,13 +8,20 @@ import 'package:yuktiidea/enterNumber.dart';
 import 'LandingPage.dart';
 
 class CountrySelect extends StatefulWidget {
-  const CountrySelect({super.key});
+  String role='d';
+  CountrySelect(String roled){
+    this.role = roled;
+  }
 
   @override
-  State<CountrySelect> createState() => _CountrySelectState();
+  State<CountrySelect> createState() => _CountrySelectState(role);
 }
 
 class _CountrySelectState extends State<CountrySelect> {
+  String role='d';
+  _CountrySelectState(String roled){
+    this.role = roled;
+  }
   List<Country> _countries = [];
   List<Country> _filteredCountries = [];
   TextEditingController _searchController = TextEditingController();
@@ -157,7 +164,7 @@ class _CountrySelectState extends State<CountrySelect> {
                     return GestureDetector(
                       onTap: (){
                         Navigator.push(context, 
-                        MaterialPageRoute(builder: (context)=> EnterNumber(_filteredCountries[index].telCode,_filteredCountries[index].flag))
+                        MaterialPageRoute(builder: (context)=> EnterNumber(role, _filteredCountries[index].telCode,_filteredCountries[index].flag))
                         );
                       },
                       child: Container(

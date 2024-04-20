@@ -67,7 +67,7 @@ class _LandingPageState extends State<LandingPage> {
                        GestureDetector(
                          onTap: (){
                            Navigator.push(context,
-                           MaterialPageRoute(builder: (context) =>CountrySelect() ),
+                           MaterialPageRoute(builder: (context) =>CountrySelect('student') ),
                            );
                          },
                          child: Container(
@@ -81,7 +81,7 @@ class _LandingPageState extends State<LandingPage> {
                        GestureDetector(
                          onTap: (){
                            Navigator.push(context,
-                           MaterialPageRoute(builder: (context) => CountrySelect()),
+                           MaterialPageRoute(builder: (context) => CountrySelect('counsellor')),
                            );
                          },
                          child: Container(
